@@ -1,41 +1,31 @@
-class Ship {
-    constructor(length, coordsArr) {
-        this.shipLength = length
-        this.hits = []
-        this.coords = coordsArr
-        this.name = ''
-        this.placed = false
-        this.sunk = false
+const Ship = (length) => {
+        const shipLife = new Array(length).fill('o')
 
-        for(var i =0; i < this.shipLength; i++){
-            this.hits[i] = 0
-        }
-        if (this.shipLength === 1) {
-            this.name =  'Tug'
-        } else if (this.shipLength === 3) {
-            this.name = 'Submarine'
-        } else if (this.shipLength === 5) {
-            this.name = 'Cruiser'
+        function findShipName(length) {  
+            const shipName = ''
+        if (length === 1) {
+            const shipName =  'Tug'
+            return shipName
+        } else if (length === 3) {
+            const shipName =  'Submarine'
+            return shipName
+        } else if (length === 5) {
+            const shipName =  'Cruiser'
+            return shipName
         } else {
-            this.name = 'Battleship'
+            const shipName =  'Battleship'
+            return shipName
         }
+    }
+    const name = findShipName(length)
+
+    const hit = (position) =>{
+        shipLife.splice(position, 1, 'hit')
     }
 
-    hit(num) {
-        this.hits[num] = 1
-    }
-
-    isSunk(){
-        var count = 0
-        for(var i = 0; i < this.shipLength; i++){
-            if(this.hits[i] === 1){
-            count = count + 1
-            }
-        }
-        if(count === this.shipLength){
-            this.sunk = true
-        }
-    }
+    const isSunk = () => shipLife.every((val) => val === 'hit')
+    
+    return {length, hit, isSunk, name}
 }
 
 module.exports = Ship
