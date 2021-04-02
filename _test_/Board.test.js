@@ -1,4 +1,4 @@
-const Board = require ('./Board');
+const Board = require ('../Board');
 
 
 describe('board', () => {
@@ -8,22 +8,20 @@ describe('board', () => {
     })
     test('place 5 ships onto the board', () => {
         const board = Board()
-        console.log(board.getBoard())
-        let shipsOnBoard = 0
+        let shipsSpacesTakenOnBoard = 0
         board.getBoard().forEach(arr => {
             const numberOfShipsOnBoard = arr.filter(value => typeof value === 'object')
-            shipsOnBoard += numberOfShipsOnBoard.length
+            shipsSpacesTakenOnBoard += numberOfShipsOnBoard.length
         })
-        console.log(board.getBoard)
-        expect(shipsOnBoard).toBe(11)
+        expect(shipsSpacesTakenOnBoard).toBe(11)
     })
     test('receiveAttack attacks a ship or records the attack', () => {
         const board = Board()
         expect(board.getBoard()[1][2] === 0 || typeof board.getBoard()[1][2] === 'object').toBeTruthy()
     board.receiveAttack(1,2)
-    expect(board.getBoard()[1][2] === 'x' || board.getBoard()[1][2] === 'sunked ship').toBeTruthy()
+    expect(board.getBoard()[1][2] === 'x' || board.getBoard()[1][2] === 'sunk ship').toBeTruthy()
     })    
-    test('allShipsSunk detects when all ship got sinked', () => {
+    test('allShipsSunk detects when all ships were sunk', () => {
         const board = Board();
         expect(board.allShipsSunk()).toBe(false);
         for(let i=0; i<10;i++){
@@ -37,7 +35,7 @@ describe('board', () => {
     test('Places the ships on random coordinates without touching each other', () => {
         const board = Board();
         const grid = board.getBoard();
-        
+   
         const checkValidity = (object,b,i) => {
             if (b === 9) {
                 if(typeof grid[b-1][i] === 'object' && grid[b-1][i] !== object){

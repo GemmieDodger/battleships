@@ -31,3 +31,4 @@ const Ship = (length) => {
 module.exports = Ship
 
 // theodinproject.com/courses/javascript/lessons/battleship
+// https://github.com/daxas-boop/battleship-tdd/tree/master/src/factories
